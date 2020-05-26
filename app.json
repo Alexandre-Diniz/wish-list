@@ -1,0 +1,21 @@
+{
+  "expo": {
+   "name": "WishList",
+   "icon": "./assets/logo.png",
+   "version": "1.0.0",
+   "slug": "wish-list",
+   "splash":{
+    "image":"./assets/splash.png",
+    "resizeMode":"contain",
+    "backgroungColor":"#1AAACF"
+   },
+   "ios": {
+     "bundleIdentifier": "io.alejo.WishList",
+     "buildNumber": "1.0.0"
+   },
+   "android": {
+     "package": "io.alejo.WishList",
+     "versionCode": 1
+   }
+  }
+}
