@@ -4,8 +4,11 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  View
+  View,
+  Dimensions
 } from 'react-native'
+
+import { EditWish } from './EditWish'
 
 const amarelo = require('../assets/images/amarelo.png')
 const azul = require('../assets/images/azul.png')
@@ -14,7 +17,7 @@ const salmao = require('../assets/images/salmao.png')
 const verde = require('../assets/images/verde.png')
 
 export const PostIt = props => {
-  const { color, text, onPress } = props
+  const { color, text, onPress, editList } = props
   let src = ''
   if (color === '#FCD462') {
     src = amarelo
@@ -34,15 +37,22 @@ export const PostIt = props => {
   return (
     <ImageBackground
       source={src}
-      style={{ width: 150, height: 150, margin: 20, }} >
+      style={{
+        width: 150,
+        height: 150,
+        marginVertical:20,
+        borderColor:color,
+        borderWidth:1
+      }} >
       <View style={{ width: 150, height: 40 }} >
-        <TouchableOpacity style={{ justifyContent:'center', alignItems:'flex-end' }} 
+        <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'flex-end' }}
           onPress={() => { onPress() }} >
-          <Image source={require('../assets/images/close.png')} style={{ height: 24, width: 24, marginRight:10, marginTop:10 }} />
+          <Image source={require('../assets/images/close.png')} style={{ height: 24, width: 24, marginRight: 10, marginTop: 10 }} />
         </TouchableOpacity>
-      </View>
-      <View style={{ width: 150, height: 110, alignItems: 'center' }} >
-        <Text> {text} </Text>
+        <View style={{ width: 150, height: 110, alignItems: 'center' }}
+        >
+          <Text style={{ fontSize: 18, marginHorizontal:5 }} > {text} </Text>
+        </View>
       </View>
     </ImageBackground>
   )

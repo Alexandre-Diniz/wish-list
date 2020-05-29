@@ -2,30 +2,42 @@ import React, { useState, useEffect } from 'react'
 import {
   View,
   StyleSheet,
-  Alert,
   AsyncStorage,
   ScrollView,
-  Button
+  Dimensions,
+  SafeAreaView
 } from 'react-native'
 import { AddWish } from './components/AddWish'
-import { PostIt } from './components/PostIt'
 import { WishList } from './components/WishLits'
 
 
 const App = () => {
   const [wishes, setWishes] = useState([])
 
+  useEffect(() => {
+    AsyncStorage.getItem('wish-list')
+      .then(wishes => {
+        if (wishes !== null) {
+          wishList = JSON.parse(wishes)
+          setWishes(wishList)
+        }
+      })
+  }, [])
+
+  useEffect(() => {
+    AsyncStorage.setItem('wish-list', JSON.stringify(wishes))
+  }, [wishes])
+
   return (
-    <View style={styles.container} >
+    <SafeAreaView style={styles.container} >
 
       <View style={styles.body} >
-        <ScrollView style={{ flex: 1 }} >
+        <ScrollView style={{ flex: 1, width: Dimensions.get('window').width - 60, marginTop:10 }} >
           <WishList wishes={wishes} itemSelected={item => {
             const filtered = wishes.filter(function (value, index, arr) {
               return value !== item
             })
             setWishes(filtered)
-            AsyncStorage.setItem('wish-list', JSON.stringify(filtered))
           }} />
         </ScrollView>
 
@@ -33,20 +45,10 @@ const App = () => {
 
       <View style={styles.footer} >
         <AddWish getWish={wish => {
-          let wishList = []
-          AsyncStorage.getItem('wish-list')
-            .then(wishes => {
-              if (wishes !== null) {
-                wishList = JSON.parse(wishes || '[]')
-                wishList = [...wishList, wish]
-                setWishes(wishList)
-                AsyncStorage.setItem('wish-list', JSON.stringify(wishList))
-                  .then(() => Alert.alert('Wish added'))
-              }
-            })
+          setWishes([...wishes, wish])
         }} />
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 9,
-    backgroundColor: '#EFCAC4',
+    backgroundColor: '#FCEDEE',
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 10
@@ -66,6 +68,8 @@ const styles = StyleSheet.create({
   footer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderTopWidth:1,
+    borderTopColor:'#FFC097',
   }
 })

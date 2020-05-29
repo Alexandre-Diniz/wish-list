@@ -1,21 +1,33 @@
 {
   "expo": {
-   "name": "WishList",
-   "icon": "./assets/logo.png",
-   "version": "1.0.0",
-   "slug": "wish-list",
-   "splash":{
-    "image":"./assets/splash.png",
-    "resizeMode":"contain",
-    "backgroungColor":"#1AAACF"
-   },
-   "ios": {
-     "bundleIdentifier": "io.alejo.WishList",
-     "buildNumber": "1.0.0"
-   },
-   "android": {
-     "package": "io.alejo.WishList",
-     "versionCode": 1
-   }
+    "name": "wish-list",
+    "slug": "wish-list",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/images/logo.png",
+    "splash": {
+      "image": "./src/assets/images/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1AAACF"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "io.alejo.WishList",
+      "buildNumber": "1.0.0",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "io.alejo.WishList",
+      "versionCode": 1
+    }
   }
 }

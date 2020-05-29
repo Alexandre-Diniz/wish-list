@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   View,
   TouchableOpacity,
@@ -6,8 +6,9 @@ import {
 } from 'react-native'
 
 export const ColorBar = props => {
-  const { chooseColor } = props
+  const { chooseColor, colorSelected } = props
   const [color, setColor] = useState('#FCD462')
+
   return (
     <View style={styles.container} >
 

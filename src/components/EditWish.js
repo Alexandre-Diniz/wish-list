@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   Alert,
   Modal,
@@ -12,11 +12,13 @@ import {
 import { ColorBar } from './ColorBar'
 import { includeWish } from '../database/AsyncStorage'
 
-export const AddWish = props => {
-  const { getWish } = props
+export const EditWish = props => {
+  const { getWish, } = props
   const [modalVisible, setModalVisible] = useState(false)
-  const [color, setColor] = useState('#FCD462')
-  const [ text, setText ] = useState('')
+  const [color, setColor] = useState(props.color)
+  const [ text, setText ] = useState(props.text)
+
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -29,13 +31,13 @@ export const AddWish = props => {
             <View style={{ width:200, height:100, borderColor:'#aaa', borderWidth:1, marginBottom:20, padding:10 }} >
               <TextInput style={{ width:180, height:80, fontSize:18 }} multiline value={text} onChangeText={text => setText(text)} />
             </View>
-            <ColorBar chooseColor={color => setColor(color)} />
+            <ColorBar chooseColor={color => setColor(color)} colorSelected={color} />
 
             <TouchableOpacity
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={() => {
                 setModalVisible(!modalVisible)
-                getWish({text, color, key: new Date()})
+                getWish({text, color, key: wish.key})
                 setText('')
                 setColor('#FCD462')
               }}
@@ -58,12 +60,12 @@ export const AddWish = props => {
       </Modal>
 
       <TouchableOpacity
-        style={styles.openButton}
+        style={{ width: 150, height: 110, alignItems: 'center' }}
         onPress={() => {
           setModalVisible(true);
         }}
       >
-        <Text style={styles.textStyle}>NEW WISH</Text>
+        <Text style={{ fontSize:18 }} > {text} </Text>
       </TouchableOpacity>
     </View>
   )

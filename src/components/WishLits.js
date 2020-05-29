@@ -6,12 +6,19 @@ import { PostIt } from './PostIt'
 
 
 export const WishList = props => {
-  const { wishes, itemSelected } = props
+  const { wishes, itemSelected, editList } = props
   
   const iter = wishes.map(item => {
-    return <PostIt color={item.color} text={item.text} onPress={()=>{itemSelected(item)}} />
+    return <PostIt
+      text={item.text}
+      key={item.key}
+      color={item.color}
+      onPress={()=>{
+        itemSelected(item)
+      }}
+      editList={wish=>editList(wish)} />
   })
-  return <View style={{ flexWrap: 'wrap', flexDirection: 'row', alignItems: 'center' }} >
+  return <View style={{ flexWrap: 'wrap', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between' }} >
     {iter}
   </View>
 }
